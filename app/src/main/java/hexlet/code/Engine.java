@@ -3,6 +3,7 @@ package hexlet.code;
 import hexlet.code.constants.Texts;
 import hexlet.code.games.CalcGame;
 import hexlet.code.games.EvenGame;
+import hexlet.code.games.GcdGame;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Scanner;
@@ -11,15 +12,17 @@ public class Engine {
     private static final int GAME_ROUNDS = 3;
     private static final int TYPE_EVEN_GAME = 2;
     private static final int TYPE_CALC_GAME = 3;
+    private static final int TYPE_GCD_GAME = 4;
 
 
     private static final int[] GAMES = {
-            TYPE_EVEN_GAME, TYPE_CALC_GAME
+            TYPE_EVEN_GAME, TYPE_CALC_GAME, TYPE_GCD_GAME
     };
 
     public static final String[] GAME_ITEMS = {
             "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE),
-            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE)
+            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE),
+            "%d - %s".formatted(TYPE_GCD_GAME, GcdGame.TITLE),
     };
 
     private static Scanner sc = new Scanner(System.in);
@@ -42,7 +45,7 @@ public class Engine {
             var userAnswer = askQuestion(question);
             var isValid = answer.equals(userAnswer);
             if (!isValid) {
-                System.out.printf(Texts.MESSAGE_GAME_OVER, name, userAnswer, answer);
+                System.out.printf(Texts.MESSAGE_GAME_OVER, userAnswer, answer, name);
                 return;
             }
 
@@ -60,7 +63,8 @@ public class Engine {
         return switch (numberOfGame) {
             case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
             case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
-            default -> new String[0];
+            case TYPE_GCD_GAME -> GcdGame.getQuestionPair();
+            default -> throw new IllegalStateException("Unexpected value: " + numberOfGame);
         };
     }
 
@@ -68,7 +72,8 @@ public class Engine {
         return switch (numberOfGame) {
             case TYPE_EVEN_GAME -> EvenGame.RULES;
             case TYPE_CALC_GAME -> CalcGame.RULES;
-            default -> "";
+            case TYPE_GCD_GAME -> GcdGame.RULES;
+            default -> throw new IllegalStateException("Unexpected value: " + numberOfGame);
         };
     }
 

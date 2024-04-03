@@ -1,6 +1,6 @@
 package hexlet.code.games;
 
-import hexlet.code.utils.Math;
+import hexlet.code.utils.MathUtils;
 
 public class EvenGame {
     public static final String TITLE = "Even";
@@ -19,6 +19,6 @@ public class EvenGame {
     }
 
     private static Integer getQuestion() {
-        return Math.randomInt(0, 20);
+        return MathUtils.randomInt(0, 20);
     }
 }
