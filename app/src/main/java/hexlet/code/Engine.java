@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.constants.Texts;
+import hexlet.code.games.CalcGame;
 import hexlet.code.games.EvenGame;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -8,13 +10,16 @@ import java.util.Scanner;
 public class Engine {
     private static final int GAME_ROUNDS = 3;
     private static final int TYPE_EVEN_GAME = 2;
+    private static final int TYPE_CALC_GAME = 3;
+
 
     private static final int[] GAMES = {
-            TYPE_EVEN_GAME
+            TYPE_EVEN_GAME, TYPE_CALC_GAME
     };
 
     public static final String[] GAME_ITEMS = {
-            "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE)
+            "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE),
+            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE)
     };
 
     private static Scanner sc = new Scanner(System.in);
@@ -52,19 +57,19 @@ public class Engine {
     }
 
     private static String[] getQuestionPair(int numberOfGame) {
-        switch (numberOfGame) {
-            case TYPE_EVEN_GAME:
-                return EvenGame.getQuestionPair();
-        }
-        return new String[0];
+        return switch (numberOfGame) {
+            case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
+            case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
+            default -> new String[0];
+        };
     }
 
     private static String getRules(int numberOfGame) {
-        switch (numberOfGame) {
-            case TYPE_EVEN_GAME:
-                return EvenGame.RULES;
-        }
-        return "";
+        return switch (numberOfGame) {
+            case TYPE_EVEN_GAME -> EvenGame.RULES;
+            case TYPE_CALC_GAME -> CalcGame.RULES;
+            default -> "";
+        };
     }
 
     private static boolean hasGame(int itemNumber) {

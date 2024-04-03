@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.constants;
 
 public class Texts {
     public static final String MESSAGE_CONGRATULATION = "Congratulations, %s!%n";
