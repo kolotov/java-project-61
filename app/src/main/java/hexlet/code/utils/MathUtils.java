@@ -1,9 +1,13 @@
 package hexlet.code.utils;
 
 public class MathUtils {
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
+    }
+
     public static int randomInt(int min, int max) {
         var random = Math.random() * (max - min + 1);
-        return min + (int)random;
+        return min + (int) random;
     }
 
     public static Integer gcd(int num1, int num2) {

@@ -15,7 +15,7 @@ public class EvenGame {
     }
 
     private static String getAnswer(int question) {
-        return question % 2 == 0 ? "yes" : "no";
+        return MathUtils.isEven(question) ? "yes" : "no";
     }
 
     private static Integer getQuestion() {
