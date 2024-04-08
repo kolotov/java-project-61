@@ -1,95 +1,59 @@
 package hexlet.code;
 
 import hexlet.code.constants.Texts;
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.GcdGame;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Scanner;
 
 public class Engine {
-    private static final int GAME_ROUNDS = 3;
-    private static final int TYPE_EVEN_GAME = 2;
-    private static final int TYPE_CALC_GAME = 3;
-    private static final int TYPE_GCD_GAME = 4;
 
+    private static final Scanner sc = new Scanner(System.in);
 
-    private static final int[] GAMES = {
-            TYPE_EVEN_GAME, TYPE_CALC_GAME, TYPE_GCD_GAME
-    };
+    public static void run(int gameType) {
+        print("%n" + Texts.MESSAGE_WELCOME);
+        var name = promptUser(Texts.MESSAGE_ASK_NAME);
+        print(Texts.MESSAGE_HELLO.formatted(name));
 
-    public static final String[] GAME_ITEMS = {
-            "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE),
-            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE),
-            "%d - %s".formatted(TYPE_GCD_GAME, GcdGame.TITLE),
-    };
+        print(GameManager.getRules(gameType));
+        startGame(gameType, name);
+    }
 
-    private static Scanner sc = new Scanner(System.in);
-
-    public static void run(int numberOfGame) {
-        if (!hasGame(numberOfGame)) {
-            return;
-        }
-
-        System.out.println(getRules(numberOfGame));
-        System.out.println(Texts.MESSAGE_WELCOME);
-        var name = askName();
-
+    public static void startGame(int gameType, String name) {
         var wins = 0;
-        while (wins < GAME_ROUNDS) {
-            var questionPair = getQuestionPair(numberOfGame);
+        while (wins < GameManager.GAME_ROUNDS) {
+            var questionPair = GameManager.getQuestionPair(gameType);
             var question = questionPair[0];
             var answer = questionPair[1];
 
-            var userAnswer = askQuestion(question);
+            var userAnswer = promptUser(Texts.MESSAGE_QUESTION_PROMPT.formatted(question));
             var isValid = answer.equals(userAnswer);
             if (!isValid) {
-                System.out.printf(Texts.MESSAGE_GAME_OVER, userAnswer, answer, name);
+                print(Texts.MESSAGE_GAME_OVER.formatted(userAnswer, answer, name));
                 return;
             }
 
             wins += 1;
-
-            System.out.println(Texts.MESSAGE_CORRECT);
+            print(Texts.MESSAGE_CORRECT);
         }
 
-        if (wins == GAME_ROUNDS) {
-            System.out.printf(Texts.MESSAGE_CONGRATULATION, name);
+        if (wins == GameManager.GAME_ROUNDS) {
+            print(Texts.MESSAGE_CONGRATULATION.formatted(name) + "%n");
         }
     }
 
-    private static String[] getQuestionPair(int numberOfGame) {
-        return switch (numberOfGame) {
-            case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
-            case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
-            case TYPE_GCD_GAME -> GcdGame.getQuestionPair();
-            default -> throw new IllegalStateException("Unexpected value: " + numberOfGame);
-        };
-    }
-
-    private static String getRules(int numberOfGame) {
-        return switch (numberOfGame) {
-            case TYPE_EVEN_GAME -> EvenGame.RULES;
-            case TYPE_CALC_GAME -> CalcGame.RULES;
-            case TYPE_GCD_GAME -> GcdGame.RULES;
-            default -> throw new IllegalStateException("Unexpected value: " + numberOfGame);
-        };
-    }
-
-    private static boolean hasGame(int itemNumber) {
-        return ArrayUtils.contains(GAMES, itemNumber);
-    }
-
-    private static String askName() {
-        System.out.print(Texts.MESSAGE_ASK_NAME);
-        var name = sc.nextLine();
-        System.out.printf(Texts.MESSAGE_HELLO, name);
-        return name;
-    }
-
-    private static String askQuestion(String question) {
-        System.out.printf(Texts.MESSAGE_QUESTION_PROMPT, question);
+    public static String promptUser(String prompt) {
+        print(prompt, false);
+        if (!sc.hasNext()) {
+            sc.next();
+            return null;
+        }
         return sc.nextLine();
+    }
+
+    private static void print(String text) {
+        print(text, true);
+    }
+    private static void print(String text, boolean ln) {
+        var eol = ln ? "%n" : "";
+        System.out.printf(text + eol);
     }
 }
