@@ -1,9 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.GcdGame;
-import hexlet.code.games.ProgressionGame;
+import hexlet.code.games.*;
 
 public class GameManager {
     static final int GAME_ROUNDS = 3;
@@ -12,40 +9,46 @@ public class GameManager {
     private static final int TYPE_CALC_GAME = 3;
     private static final int TYPE_GCD_GAME = 4;
     private static final int TYPE_PROGRESSION_GAME = 5;
+    private static final int TYPE_PRIME_GAME = 6;
 
-    static final int[] GAME_TYPES = {
-            GameManager.TYPE_EVEN_GAME,
-            GameManager.TYPE_CALC_GAME,
-            GameManager.TYPE_GCD_GAME,
-            GameManager.TYPE_PROGRESSION_GAME
+
+    private static final int[] GAME_TYPES = {
+            TYPE_EVEN_GAME,
+            TYPE_CALC_GAME,
+            TYPE_GCD_GAME,
+            TYPE_PROGRESSION_GAME,
+            TYPE_PRIME_GAME
     };
 
     static String[] getQuestionPair(int gameType) {
         return switch (gameType) {
-            case GameManager.TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
-            case GameManager.TYPE_CALC_GAME -> CalcGame.getQuestionPair();
-            case GameManager.TYPE_GCD_GAME -> GcdGame.getQuestionPair();
-            case GameManager.TYPE_PROGRESSION_GAME -> ProgressionGame.getQuestionPair();
+            case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
+            case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
+            case TYPE_GCD_GAME -> GcdGame.getQuestionPair();
+            case TYPE_PROGRESSION_GAME -> ProgressionGame.getQuestionPair();
+            case TYPE_PRIME_GAME -> PrimeGame.getQuestionPair();
             default -> throw new IllegalStateException("Unexpected value: " + gameType);
         };
     }
 
     static String getRules(int gameType) {
         return switch (gameType) {
-            case GameManager.TYPE_EVEN_GAME -> EvenGame.RULES;
-            case GameManager.TYPE_CALC_GAME -> CalcGame.RULES;
-            case GameManager.TYPE_GCD_GAME -> GcdGame.RULES;
-            case GameManager.TYPE_PROGRESSION_GAME -> ProgressionGame.RULES;
+            case TYPE_EVEN_GAME -> EvenGame.RULES;
+            case TYPE_CALC_GAME -> CalcGame.RULES;
+            case TYPE_GCD_GAME -> GcdGame.RULES;
+            case TYPE_PROGRESSION_GAME -> ProgressionGame.RULES;
+            case TYPE_PRIME_GAME -> PrimeGame.RULES;
             default -> throw new IllegalStateException("Unexpected value: " + gameType);
         };
     }
 
     static String getTitle(int gameType) {
         return switch (gameType) {
-            case GameManager.TYPE_EVEN_GAME -> EvenGame.TITLE;
-            case GameManager.TYPE_CALC_GAME -> CalcGame.TITLE;
-            case GameManager.TYPE_GCD_GAME -> GcdGame.TITLE;
-            case GameManager.TYPE_PROGRESSION_GAME -> ProgressionGame.TITLE;
+            case TYPE_EVEN_GAME -> EvenGame.TITLE;
+            case TYPE_CALC_GAME -> CalcGame.TITLE;
+            case TYPE_GCD_GAME -> GcdGame.TITLE;
+            case TYPE_PROGRESSION_GAME -> ProgressionGame.TITLE;
+            case TYPE_PRIME_GAME -> PrimeGame.TITLE;
             default -> throw new IllegalStateException("Unexpected value: " + gameType);
         };
     }
