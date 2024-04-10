@@ -21,7 +21,7 @@ public class App {
         var itemNumber = Integer.parseInt(answer);
         if (itemNumber == 1) {
             Cli.greetUser();
-            return -1;
+            return 0;
         }
 
         if (GameManager.hasGame(itemNumber)) {
