@@ -24,11 +24,13 @@ public class ProgressionGame {
 
     private static String[] createProgression(int length) {
         String[] result = new String[length];
-        var q = MathUtils.randomInt(2, 10);
-        var nextNumber = MathUtils.randomInt(1, 20);
+        var maxStep = 10;
+        var step = MathUtils.randomInt(2, maxStep);
+        var maxNumber = 20;
+        var nextNumber = MathUtils.randomInt(1, maxNumber);
         for (var i = 0; i < length; i += 1) {
             result[i] = String.valueOf(nextNumber);
-            nextNumber = nextNumber + q;
+            nextNumber = nextNumber + step;
         }
         return result;
     }

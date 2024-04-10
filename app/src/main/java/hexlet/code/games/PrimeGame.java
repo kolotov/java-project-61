@@ -16,6 +16,7 @@ public class PrimeGame {
     }
 
     private static Integer getQuestion() {
-        return MathUtils.randomInt(0, 20);
+        var maxNumber = 20;
+        return MathUtils.randomInt(0, maxNumber);
     }
 }

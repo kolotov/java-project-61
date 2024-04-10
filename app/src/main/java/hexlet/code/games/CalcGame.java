@@ -9,8 +9,10 @@ public class CalcGame {
     private static final String[] OPERATORS = {"+", "-", "*"};
 
     public static String[] getQuestionPair() {
-        var num1 = MathUtils.randomInt(2, 10);
-        var num2 = MathUtils.randomInt(2, 10);
+        var minNumber = 2;
+        var maxNumber = 10;
+        var num1 = MathUtils.randomInt(minNumber, maxNumber);
+        var num2 = MathUtils.randomInt(minNumber, maxNumber);
         var operator = OPERATORS[MathUtils.randomInt(0, 2)];
         var question = "%d %s %d".formatted(num1, operator, num2);
         var answer = getAnswer(num1, num2, operator).toString();
