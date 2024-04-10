@@ -8,9 +8,9 @@ public class ProgressionGame {
     public static final String RULES = "What number is missing in the progression?";
 
     public static String[] getQuestionPair() {
-        var length = 10;
-        var sequence = createProgression(length);
-        var hiddenIndex = MathUtils.randomInt(0, length);
+        var lengthOfProgression = 10;
+        var sequence = createProgression(lengthOfProgression);
+        var hiddenIndex = MathUtils.randomInt(0, lengthOfProgression);
         var answer = sequence[hiddenIndex];
         var question = sequenceToString(sequence, hiddenIndex);
         return new String[]{question, answer};
@@ -24,10 +24,10 @@ public class ProgressionGame {
 
     private static String[] createProgression(int length) {
         String[] result = new String[length];
-        var maxStep = 10;
-        var step = MathUtils.randomInt(2, maxStep);
-        var maxNumber = 20;
-        var nextNumber = MathUtils.randomInt(1, maxNumber);
+        var maxStepOfProgression = 10;
+        var step = MathUtils.randomInt(2, maxStepOfProgression);
+        var maxNumberOfRange = 20;
+        var nextNumber = MathUtils.randomInt(1, maxNumberOfRange);
         for (var i = 0; i < length; i += 1) {
             result[i] = String.valueOf(nextNumber);
             nextNumber = nextNumber + step;

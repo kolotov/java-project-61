@@ -16,7 +16,7 @@ public class EvenGame {
     }
 
     private static Integer getQuestion() {
-        var maxNumber = 20;
-        return MathUtils.randomInt(0, maxNumber);
+        var maxNumberOfRange = 20;
+        return MathUtils.randomInt(0, maxNumberOfRange);
     }
 }
