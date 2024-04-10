@@ -10,7 +10,7 @@ public class ProgressionGame {
     public static String[] getQuestionPair() {
         var lengthOfProgression = 10;
         var sequence = createProgression(lengthOfProgression);
-        var hiddenIndex = MathUtils.randomInt(0, lengthOfProgression);
+        var hiddenIndex = MathUtils.randomInt(0, lengthOfProgression - 1);
         var answer = sequence[hiddenIndex];
         var question = sequenceToString(sequence, hiddenIndex);
         return new String[]{question, answer};
