@@ -13,10 +13,7 @@ public class ProgressionGame {
         var hiddenIndex = MathUtils.randomInt(0, length);
         var answer = sequence[hiddenIndex];
         var question = sequenceToString(sequence, hiddenIndex);
-        return new String[]{
-                question,
-                answer
-        };
+        return new String[]{question, answer};
     }
 
     private static String sequenceToString(String[] sequence, int hideIndex) {

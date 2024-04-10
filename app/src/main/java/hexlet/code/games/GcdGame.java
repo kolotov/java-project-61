@@ -11,13 +11,10 @@ public class GcdGame {
         var num1 = MathUtils.randomInt(10, 100);
         var num2 = MathUtils.randomInt(20, 100);
         var question = "%d %d".formatted(num1, num2);
-        return new String[]{
-                question,
-                getAnswer(num1, num2).toString()
-        };
+        return new String[]{question, getAnswer(num1, num2).toString()};
     }
 
-    private static Integer getAnswer(int num1,int num2) {
+    private static Integer getAnswer(int num1, int num2) {
         return MathUtils.gcd(num1, num2);
     }
 }

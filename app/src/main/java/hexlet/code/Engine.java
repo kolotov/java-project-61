@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Engine {
 
-    private static final Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     public static void run(int gameType) {
         print("%n" + Texts.MESSAGE_WELCOME);
@@ -52,6 +52,7 @@ public class Engine {
     private static void print(String text) {
         print(text, true);
     }
+
     private static void print(String text, boolean ln) {
         var eol = ln ? "%n" : "";
         System.out.printf(text + eol);

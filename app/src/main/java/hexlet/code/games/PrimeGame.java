@@ -8,10 +8,7 @@ public class PrimeGame {
 
     public static String[] getQuestionPair() {
         var question = getQuestion();
-        return new String[]{
-                question.toString(),
-                getAnswer(question)
-        };
+        return new String[]{question.toString(), getAnswer(question)};
     }
 
     private static String getAnswer(int question) {

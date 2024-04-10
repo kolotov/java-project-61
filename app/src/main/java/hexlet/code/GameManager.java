@@ -1,6 +1,10 @@
 package hexlet.code;
 
-import hexlet.code.games.*;
+import hexlet.code.games.EvenGame;
+import hexlet.code.games.CalcGame;
+import hexlet.code.games.PrimeGame;
+import hexlet.code.games.GcdGame;
+import hexlet.code.games.ProgressionGame;
 
 public class GameManager {
     static final int GAME_ROUNDS = 3;
@@ -11,14 +15,8 @@ public class GameManager {
     private static final int TYPE_PROGRESSION_GAME = 5;
     private static final int TYPE_PRIME_GAME = 6;
 
-
-    private static final int[] GAME_TYPES = {
-            TYPE_EVEN_GAME,
-            TYPE_CALC_GAME,
-            TYPE_GCD_GAME,
-            TYPE_PROGRESSION_GAME,
-            TYPE_PRIME_GAME
-    };
+    private static final int[] GAME_TYPES
+            = {TYPE_EVEN_GAME, TYPE_CALC_GAME, TYPE_GCD_GAME, TYPE_PROGRESSION_GAME, TYPE_PRIME_GAME};
 
     static String[] getQuestionPair(int gameType) {
         return switch (gameType) {
