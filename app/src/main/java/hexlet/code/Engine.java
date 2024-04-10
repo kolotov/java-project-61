@@ -42,10 +42,6 @@ public class Engine {
 
     public static String promptUser(String prompt) {
         print(prompt, false);
-        if (!sc.hasNext()) {
-            sc.next();
-            return null;
-        }
         return sc.nextLine();
     }
 

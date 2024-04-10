@@ -14,7 +14,7 @@ public class App {
         showMenu();
 
         var answer = Engine.promptUser("Your choice: ");
-        if (answer == null || !IntUtils.isInt(answer)) {
+        if (!IntUtils.isInt(answer)) {
             return -1;
         }
 
