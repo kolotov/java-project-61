@@ -27,6 +27,28 @@ and writing clean code.
 
 ## Demo
 ### Game "Even"
-Users see a random number and answer "yes" if it's even, "no" if it's odd.
+The user sees a random number and answers "yes" if it's even, "no" if it's odd.
 
 [![asciicast](https://asciinema.org/a/3MZtdDNr6RgFTlulLFpmzOYzR.svg)](https://asciinema.org/a/3MZtdDNr6RgFTlulLFpmzOYzR)
+### Game "Calc"
+The user has to calculate the result of an operation between two numbers.
+
+[![asciicast](https://asciinema.org/a/653498.svg)](https://asciinema.org/a/653498)
+### Game "GCD"
+The user has to find the greatest common divisor (GCD) of two numbers.
+
+[![asciicast](https://asciinema.org/a/653499.svg)](https://asciinema.org/a/653499)
+### Game "Progression"
+The user has to identify the missing number in a sequence.
+
+[![asciicast](https://asciinema.org/a/653501.svg)](https://asciinema.org/a/653501)
+### Game "Prime"
+The user has to determine whether a number is prime or not.
+
+[![asciicast](https://asciinema.org/a/653502.svg)](https://asciinema.org/a/653502)
+
+
+
+
+
+
