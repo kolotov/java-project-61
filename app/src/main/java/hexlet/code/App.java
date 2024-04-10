@@ -4,30 +4,28 @@ import hexlet.code.utils.IntUtils;
 
 public class App {
     public static void main(String[] args) {
-        int itemNumber = -1;
-        while (itemNumber != 0) {
-            itemNumber = handle();
-        }
-    }
+        while (true) {
+            showMenu();
+            var answer = Engine.promptUser("Your choice: ");
+            if (!IntUtils.isInt(answer)) {
+                continue;
+            }
 
-    private static int handle() {
-        showMenu();
+            var itemNumber = Integer.parseInt(answer);
+            if (itemNumber == 0) {
+                return;
+            }
 
-        var answer = Engine.promptUser("Your choice: ");
-        if (!IntUtils.isInt(answer)) {
-            return -1;
-        }
+            if (itemNumber == 1) {
+                Cli.greetUser();
+                return;
+            }
 
-        var itemNumber = Integer.parseInt(answer);
-        if (itemNumber == 1) {
-            Cli.greetUser();
-            return 0;
+            if (GameManager.hasGame(itemNumber)) {
+                Engine.run(itemNumber);
+                return;
+            }
         }
-
-        if (GameManager.hasGame(itemNumber)) {
-            Engine.run(itemNumber);
-        }
-        return itemNumber;
     }
 
     private static void showMenu() {
