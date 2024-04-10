@@ -8,12 +8,14 @@ public class CalcGame {
 
     private static final String[] OPERATORS = {"+", "-", "*"};
 
+    private static final int MIN_NUMBER = 2;
+    private static final int MAX_NUMBER = 10;
+    private static final int COUNT_OPERATORS = 3;
+
     public static String[] getQuestionPair() {
-        var minNumberOfRange = 2;
-        var maxNumberOfRange = 10;
-        var num1 = MathUtils.randomInt(minNumberOfRange, maxNumberOfRange);
-        var num2 = MathUtils.randomInt(minNumberOfRange, maxNumberOfRange);
-        var operator = OPERATORS[MathUtils.randomInt(0, 2)];
+        var num1 = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+        var num2 = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+        var operator = OPERATORS[MathUtils.randomInt(0, COUNT_OPERATORS - 1)];
         var question = "%d %s %d".formatted(num1, operator, num2);
         var answer = getAnswer(num1, num2, operator).toString();
         return new String[]{question, answer};

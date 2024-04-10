@@ -7,10 +7,15 @@ public class ProgressionGame {
     public static final String TITLE = "Progression";
     public static final String RULES = "What number is missing in the progression?";
 
+    private static final int MIN_STEP = 2;
+    private static final int MAX_STEP = 10;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 20;
+    private static final int LENGTH_PROGRESSION = 20;
+
     public static String[] getQuestionPair() {
-        var lengthOfProgression = 10;
-        var sequence = createProgression(lengthOfProgression);
-        var hiddenIndex = MathUtils.randomInt(0, lengthOfProgression - 1);
+        var sequence = createProgression();
+        var hiddenIndex = MathUtils.randomInt(0, LENGTH_PROGRESSION - 1);
         var answer = sequence[hiddenIndex];
         var question = sequenceToString(sequence, hiddenIndex);
         return new String[]{question, answer};
@@ -22,13 +27,11 @@ public class ProgressionGame {
         return String.join(" ", sequence);
     }
 
-    private static String[] createProgression(int length) {
-        String[] result = new String[length];
-        var maxStepOfProgression = 10;
-        var step = MathUtils.randomInt(2, maxStepOfProgression);
-        var maxNumberOfRange = 20;
-        var nextNumber = MathUtils.randomInt(1, maxNumberOfRange);
-        for (var i = 0; i < length; i += 1) {
+    private static String[] createProgression() {
+        String[] result = new String[LENGTH_PROGRESSION];
+        var step = MathUtils.randomInt(MIN_STEP, MAX_STEP);
+        var nextNumber = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+        for (var i = 0; i < LENGTH_PROGRESSION; i += 1) {
             result[i] = String.valueOf(nextNumber);
             nextNumber = nextNumber + step;
         }
