@@ -4,7 +4,7 @@ import hexlet.code.utils.MathUtils;
 
 public class EvenGame {
     public static final String TITLE = "Even";
-    public static final String RULES = "Answer 'yes' if the number is even, otherwise answer 'no'";
+    public static final String RULES = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
     public static String[] getQuestionPair() {
         var question = getQuestion();
