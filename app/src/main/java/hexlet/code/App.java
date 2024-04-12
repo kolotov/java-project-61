@@ -19,7 +19,7 @@ public class App {
                 return;
             }
 
-            if (GameManager.hasGame(itemNumber)) {
+            if (Engine.hasGame(itemNumber)) {
                 Engine.run(itemNumber);
                 return;
             }
@@ -29,7 +29,7 @@ public class App {
     private static void showMenu() {
         System.out.println("Please enter the game number and press Enter.");
         System.out.println("1 - Great");
-        for (var item : GameManager.getMenuTitles()) {
+        for (var item : Engine.getMenuTitles()) {
             System.out.println(item);
         }
         System.out.println("0 - Exit");
