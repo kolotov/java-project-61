@@ -1,13 +1,11 @@
 package hexlet.code;
 
-import hexlet.code.utils.IntUtils;
-
 public class App {
     public static void main(String[] args) {
         while (true) {
             showMenu();
             var answer = Engine.promptUser("Your choice: ");
-            if (!IntUtils.isInt(answer)) {
+            if (!isInt(answer)) {
                 continue;
             }
 
@@ -35,6 +33,15 @@ public class App {
             System.out.println(item);
         }
         System.out.println("0 - Exit");
+    }
+
+    private static boolean isInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
 
