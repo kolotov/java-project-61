@@ -1,17 +1,22 @@
 package hexlet.code;
 
-import hexlet.code.constants.Texts;
-
 import java.util.Scanner;
 
 public class Engine {
-
+    private static final String MESSAGE_CONGRATULATION = "Congratulations, %s!";
+    private static final String MESSAGE_CORRECT = "Correct!";
+    private static final String MESSAGE_WELCOME = "Welcome to the Brain Games!";
+    private static final String MESSAGE_GAME_OVER
+            = "'%s' is wrong answer ;(. Correct answer was '%s'.%nLet's try again, %s!";
+    private static final String MESSAGE_QUESTION_PROMPT = "Question: %s%nYour answer: ";
+    private static final String MESSAGE_ASK_NAME = "May I have your name? ";
+    private static final String MESSAGE_HELLO = "Hello, %s!";
     private static Scanner sc = new Scanner(System.in);
 
     public static void run(int gameType) {
-        print("%n" + Texts.MESSAGE_WELCOME);
-        var name = promptUser(Texts.MESSAGE_ASK_NAME);
-        print(Texts.MESSAGE_HELLO.formatted(name));
+        print("%n" + MESSAGE_WELCOME);
+        var name = promptUser(MESSAGE_ASK_NAME);
+        print(MESSAGE_HELLO.formatted(name));
 
         print(GameManager.getRules(gameType));
         startGame(gameType, name);
@@ -24,19 +29,19 @@ public class Engine {
             var question = questionPair[0];
             var answer = questionPair[1];
 
-            var userAnswer = promptUser(Texts.MESSAGE_QUESTION_PROMPT.formatted(question));
+            var userAnswer = promptUser(MESSAGE_QUESTION_PROMPT.formatted(question));
             var isValid = answer.equals(userAnswer);
             if (!isValid) {
-                print(Texts.MESSAGE_GAME_OVER.formatted(userAnswer, answer, name));
+                print(MESSAGE_GAME_OVER.formatted(userAnswer, answer, name));
                 return;
             }
 
             wins += 1;
-            print(Texts.MESSAGE_CORRECT);
+            print(MESSAGE_CORRECT);
         }
 
         if (wins == GameManager.GAME_ROUNDS) {
-            print(Texts.MESSAGE_CONGRATULATION.formatted(name) + "%n");
+            print(MESSAGE_CONGRATULATION.formatted(name) + "%n");
         }
     }
 
