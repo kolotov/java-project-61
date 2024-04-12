@@ -15,10 +15,24 @@ public class PrimeGame {
     }
 
     private static String getAnswer(int question) {
-        return MathUtils.isPrime(question) ? "yes" : "no";
+        return isPrime(question) ? "yes" : "no";
     }
 
     private static Integer getQuestion() {
         return MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+    }
+
+    private static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        int start = number / 2;
+        for (var i = start; i > 1; i -= 1) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

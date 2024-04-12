@@ -18,6 +18,20 @@ public class GcdGame {
     }
 
     private static Integer getAnswer(int num1, int num2) {
-        return MathUtils.gcd(num1, num2);
+        return gcd(num1, num2);
+    }
+
+    private static Integer gcd(int num1, int num2) {
+        if (num1 == 0) {
+            return num2;
+        }
+
+        if (num2 == 0) {
+            return num1;
+        }
+        var min = Math.min(num1, num2);
+        var max = Math.max(num1, num2);
+        var remainder = max % min;
+        return gcd(min, remainder);
     }
 }

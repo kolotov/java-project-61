@@ -15,10 +15,14 @@ public class EvenGame {
     }
 
     private static String getAnswer(int question) {
-        return MathUtils.isEven(question) ? "yes" : "no";
+        return isEven(question) ? "yes" : "no";
     }
 
     private static Integer getQuestion() {
         return MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+    }
+
+    private static boolean isEven(int number) {
+        return number % 2 == 0;
     }
 }
