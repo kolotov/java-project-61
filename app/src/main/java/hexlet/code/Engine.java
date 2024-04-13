@@ -26,23 +26,37 @@ public class Engine {
     private static final int TYPE_PROGRESSION_GAME = 5;
     private static final int TYPE_PRIME_GAME = 6;
 
+    public static final String[] GAME_TITLES = {
+            "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE),
+            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE),
+            "%d - %s".formatted(TYPE_GCD_GAME, GcdGame.TITLE),
+            "%d - %s".formatted(TYPE_PROGRESSION_GAME, ProgressionGame.TITLE),
+            "%d - %s".formatted(TYPE_PRIME_GAME, PrimeGame.TITLE)
+    };
+
     private static final int[] GAME_TYPES
             = {TYPE_EVEN_GAME, TYPE_CALC_GAME, TYPE_GCD_GAME, TYPE_PROGRESSION_GAME, TYPE_PRIME_GAME};
+
     private static Scanner sc = new Scanner(System.in);
 
     public static void run(int gameType) {
-        System.out.printf("%n" + MESSAGE_WELCOME + "%n");
+        System.out.println();
+        System.out.println(MESSAGE_WELCOME);
+
         var name = promptUser(MESSAGE_ASK_NAME);
         System.out.printf(MESSAGE_HELLO + "%n", name);
 
-        System.out.println(getRules(gameType));
-        startGame(gameType, name);
+        var gameData = loadGame(gameType);
+        startGame(gameData, name);
     }
 
-    private static void startGame(int gameType, String name) {
-        var wins = 0;
-        while (wins < GAME_ROUNDS) {
-            var questionPair = getQuestionPair(gameType);
+    private static void startGame(String[][] gameData, String name) {
+        var rules = gameData[0][0];
+        System.out.println(rules);
+
+        var currentRound = 0;
+        while (currentRound < GAME_ROUNDS) {
+            var questionPair = gameData[currentRound + 1];
             var question = questionPair[0];
             var answer = questionPair[1];
 
@@ -53,11 +67,11 @@ public class Engine {
                 return;
             }
 
-            wins += 1;
+            currentRound += 1;
             System.out.println(MESSAGE_CORRECT);
         }
 
-        if (wins == GAME_ROUNDS) {
+        if (currentRound == GAME_ROUNDS) {
             System.out.printf(MESSAGE_CONGRATULATION.formatted(name) + "%n");
         }
     }
@@ -65,16 +79,6 @@ public class Engine {
     public static String promptUser(String prompt) {
         System.out.print(prompt);
         return sc.nextLine();
-    }
-
-    public static String[] getMenuTitles() {
-        String[] titles = new String[GAME_TYPES.length];
-        var i = 0;
-        for (var type : GAME_TYPES) {
-            titles[i] = "%d - %s".formatted(type, getTitle(type));
-            i += 1;
-        }
-        return titles;
     }
 
     public static boolean hasGame(int gameType) {
@@ -86,19 +90,9 @@ public class Engine {
         return false;
     }
 
-    private static String[] getQuestionPair(int gameType) {
-        return switch (gameType) {
-            case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
-            case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
-            case TYPE_GCD_GAME -> GcdGame.getQuestionPair();
-            case TYPE_PROGRESSION_GAME -> ProgressionGame.getQuestionPair();
-            case TYPE_PRIME_GAME -> PrimeGame.getQuestionPair();
-            default -> throw new IllegalStateException("Unexpected value: " + gameType);
-        };
-    }
-
-    private static String getRules(int gameType) {
-        return switch (gameType) {
+    private static String[][] loadGame(int gameType) {
+        var data = new String[GAME_ROUNDS + 1][1];
+        data[0][0] = switch (gameType) {
             case TYPE_EVEN_GAME -> EvenGame.RULES;
             case TYPE_CALC_GAME -> CalcGame.RULES;
             case TYPE_GCD_GAME -> GcdGame.RULES;
@@ -106,16 +100,17 @@ public class Engine {
             case TYPE_PRIME_GAME -> PrimeGame.RULES;
             default -> throw new IllegalStateException("Unexpected value: " + gameType);
         };
-    }
 
-    private static String getTitle(int gameType) {
-        return switch (gameType) {
-            case TYPE_EVEN_GAME -> EvenGame.TITLE;
-            case TYPE_CALC_GAME -> CalcGame.TITLE;
-            case TYPE_GCD_GAME -> GcdGame.TITLE;
-            case TYPE_PROGRESSION_GAME -> ProgressionGame.TITLE;
-            case TYPE_PRIME_GAME -> PrimeGame.TITLE;
-            default -> throw new IllegalStateException("Unexpected value: " + gameType);
-        };
+        for (var i = 0; i < GAME_ROUNDS; i += 1) {
+            data[i + 1] = switch (gameType) {
+                case TYPE_EVEN_GAME -> EvenGame.getQuestionPair();
+                case TYPE_CALC_GAME -> CalcGame.getQuestionPair();
+                case TYPE_GCD_GAME -> GcdGame.getQuestionPair();
+                case TYPE_PROGRESSION_GAME -> ProgressionGame.getQuestionPair();
+                case TYPE_PRIME_GAME -> PrimeGame.getQuestionPair();
+                default -> throw new IllegalStateException("Unexpected value: " + gameType);
+            };
+        }
+        return data;
     }
 }

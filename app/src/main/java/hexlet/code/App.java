@@ -29,7 +29,7 @@ public class App {
     private static void showMenu() {
         System.out.println("Please enter the game number and press Enter.");
         System.out.println("1 - Great");
-        for (var item : Engine.getMenuTitles()) {
+        for (var item : Engine.GAME_TITLES) {
             System.out.println(item);
         }
         System.out.println("0 - Exit");
