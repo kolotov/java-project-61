@@ -33,14 +33,10 @@ public class App {
         }
 
         switch (itemNumber) {
-            case 0:
-                break;
-            case 1:
-                Cli.greetUser();
-                break;
-            case 2:
-                Engine.run(itemNumber);
-                break;
+            case 0 -> {
+            }
+            case 1 -> Cli.greetUser();
+            case 2, 3, 4, 5, 6 -> Engine.run(itemNumber);
         }
     }
 }
