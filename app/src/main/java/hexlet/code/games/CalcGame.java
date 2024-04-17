@@ -16,11 +16,11 @@ public class CalcGame {
         var num2 = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
         var operator = OPERATORS[MathUtils.randomInt(0, OPERATORS.length - 1)];
         var question = "%d %s %d".formatted(num1, operator, num2);
-        var answer = getAnswer(num1, num2, operator).toString();
+        var answer = calculate(num1, num2, operator).toString();
         return new String[]{question, answer};
     }
 
-    private static Integer getAnswer(int num1, int num2, String operator) {
+    private static Integer calculate(int num1, int num2, String operator) {
         return switch (operator) {
             case "+" -> num1 + num2;
             case "-" -> num1 - num2;
