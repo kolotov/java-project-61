@@ -1,25 +1,25 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.utils.MathUtils;
 
 public class EvenGame {
-    public static final String TITLE = "Even";
     public static final String RULES = "Answer 'yes' if the number is even, otherwise answer 'no'.";
-
     private static final int MIN_NUMBER = 0;
     private static final int MAX_NUMBER = 20;
 
-    public static String[] getQuestionPair() {
-        var question = getQuestion();
-        return new String[]{question.toString(), getAnswer(question)};
+    public static void run() {
+        Engine.run(RULES, new String[][]{
+                packToPair(),
+                packToPair(),
+                packToPair()
+        });
     }
 
-    private static String getAnswer(int question) {
-        return isEven(question) ? "yes" : "no";
-    }
-
-    private static Integer getQuestion() {
-        return MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+    private static String[] packToPair() {
+        var question = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+        var answer = isEven(question) ? "yes" : "no";
+        return new String[]{String.valueOf(question), answer};
     }
 
     private static boolean isEven(int number) {

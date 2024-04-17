@@ -1,9 +1,9 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
 import hexlet.code.utils.MathUtils;
 
 public class CalcGame {
-    public static final String TITLE = "Calc";
     public static final String RULES = "What is the result of the expression?";
 
     private static final String[] OPERATORS = {"+", "-", "*"};
@@ -11,7 +11,15 @@ public class CalcGame {
     private static final int MIN_NUMBER = 2;
     private static final int MAX_NUMBER = 10;
 
-    public static String[] getQuestionPair() {
+    public static void run() {
+        Engine.run(RULES, new String[][]{
+                packToPair(),
+                packToPair(),
+                packToPair()
+        });
+    }
+
+    private static String[] packToPair() {
         var num1 = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
         var num2 = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
         var operator = OPERATORS[MathUtils.randomInt(0, OPERATORS.length - 1)];

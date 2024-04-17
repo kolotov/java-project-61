@@ -9,8 +9,15 @@ import hexlet.code.games.EvenGame;
 import java.util.Scanner;
 
 public class App {
+    private static final int MENU_ITEM_EXIT = 0;
+    private static final int MENU_ITEM_GREAT = 1;
+    private static final int MENU_ITEM_EVEN_GAME = 2;
+    private static final int MENU_ITEM_CALC_GAME = 3;
+    private static final int MENU_ITEM_GCD_GAME = 4;
+    private static final int MENU_ITEM_PROGRESSION_GAME = 5;
+    private static final int MENU_ITEM_PRIME_GAME = 6;
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         showMenu();
@@ -18,13 +25,13 @@ public class App {
 
     private static void showMenu() {
         System.out.println("Please enter the game number and press Enter.");
-        System.out.println("1 - Great");
-        System.out.printf("%d - %s%n", Engine.TYPE_EVEN_GAME, EvenGame.TITLE);
-        System.out.printf("%d - %s%n", Engine.TYPE_CALC_GAME, CalcGame.TITLE);
-        System.out.printf("%d - %s%n", Engine.TYPE_GCD_GAME, GcdGame.TITLE);
-        System.out.printf("%d - %s%n", Engine.TYPE_PROGRESSION_GAME, ProgressionGame.TITLE);
-        System.out.printf("%d - %s%n", Engine.TYPE_PRIME_GAME, PrimeGame.TITLE);
-        System.out.println("0 - Exit");
+        System.out.printf("%d - Great%n", MENU_ITEM_GREAT);
+        System.out.printf("%d - Even%n", MENU_ITEM_EVEN_GAME);
+        System.out.printf("%d - Calc%n", MENU_ITEM_CALC_GAME);
+        System.out.printf("%d - GCD%n", MENU_ITEM_GCD_GAME);
+        System.out.printf("%d - Progression%n", MENU_ITEM_PROGRESSION_GAME);
+        System.out.printf("%d - Prime%n", MENU_ITEM_PRIME_GAME);
+        System.out.printf("%d - Exit%n", MENU_ITEM_EXIT);
 
         System.out.print("Your choice: ");
         var itemNumber = 0;
@@ -33,10 +40,14 @@ public class App {
         }
 
         switch (itemNumber) {
-            case 0 -> {
-            }
-            case 1 -> Cli.greetUser();
-            case 2, 3, 4, 5, 6 -> Engine.run(itemNumber);
+            case MENU_ITEM_EXIT -> { }
+            case MENU_ITEM_GREAT -> Cli.greetUser();
+            case MENU_ITEM_EVEN_GAME -> EvenGame.run();
+            case MENU_ITEM_CALC_GAME -> CalcGame.run();
+            case MENU_ITEM_GCD_GAME -> GcdGame.run();
+            case MENU_ITEM_PROGRESSION_GAME -> ProgressionGame.run();
+            case MENU_ITEM_PRIME_GAME -> PrimeGame.run();
+            default -> { }
         }
     }
 }
