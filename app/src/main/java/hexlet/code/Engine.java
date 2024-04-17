@@ -20,30 +20,21 @@ public class Engine {
 
     private static final int GAME_ROUNDS = 3;
 
-    private static final int TYPE_EVEN_GAME = 2;
-    private static final int TYPE_CALC_GAME = 3;
-    private static final int TYPE_GCD_GAME = 4;
-    private static final int TYPE_PROGRESSION_GAME = 5;
-    private static final int TYPE_PRIME_GAME = 6;
+    public static final int TYPE_EVEN_GAME = 2;
+    public static final int TYPE_CALC_GAME = 3;
+    public static final int TYPE_GCD_GAME = 4;
+    public static final int TYPE_PROGRESSION_GAME = 5;
+    public static final int TYPE_PRIME_GAME = 6;
 
-    public static final String[] GAME_TITLES = {
-            "%d - %s".formatted(TYPE_EVEN_GAME, EvenGame.TITLE),
-            "%d - %s".formatted(TYPE_CALC_GAME, CalcGame.TITLE),
-            "%d - %s".formatted(TYPE_GCD_GAME, GcdGame.TITLE),
-            "%d - %s".formatted(TYPE_PROGRESSION_GAME, ProgressionGame.TITLE),
-            "%d - %s".formatted(TYPE_PRIME_GAME, PrimeGame.TITLE)
-    };
-
-    private static final int[] GAME_TYPES
-            = {TYPE_EVEN_GAME, TYPE_CALC_GAME, TYPE_GCD_GAME, TYPE_PROGRESSION_GAME, TYPE_PRIME_GAME};
-
-    private static Scanner sc = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void run(int gameType) {
         System.out.println();
         System.out.println(MESSAGE_WELCOME);
 
-        var name = promptUser(MESSAGE_ASK_NAME);
+        System.out.print(MESSAGE_ASK_NAME);
+        var name = scanner.nextLine();
+
         System.out.printf(MESSAGE_HELLO + "%n", name);
 
         var gameData = loadGame(gameType);
@@ -60,7 +51,8 @@ public class Engine {
             var question = questionPair[0];
             var answer = questionPair[1];
 
-            var userAnswer = promptUser(MESSAGE_QUESTION_PROMPT.formatted(question));
+            System.out.printf(MESSAGE_QUESTION_PROMPT, question);
+            var userAnswer = scanner.nextLine();
             var isValid = answer.equals(userAnswer);
             if (!isValid) {
                 System.out.printf(MESSAGE_GAME_OVER + "%n", userAnswer, answer, name);
@@ -74,20 +66,6 @@ public class Engine {
         if (currentRound == GAME_ROUNDS) {
             System.out.printf(MESSAGE_CONGRATULATION.formatted(name) + "%n");
         }
-    }
-
-    public static String promptUser(String prompt) {
-        System.out.print(prompt);
-        return sc.nextLine();
-    }
-
-    public static boolean hasGame(int gameType) {
-        for (var game : GAME_TYPES) {
-            if (game == gameType) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static String[][] loadGame(int gameType) {
