@@ -11,11 +11,12 @@ public class GcdGame {
     private static final int MAX_NUMBER = 100;
 
     public static void run() {
-        Engine.run(RULES, new String[][]{
-                packToPair(),
-                packToPair(),
-                packToPair()
-        });
+        String[][] data = new String[Engine.GAME_ROUNDS][];
+        for (var i = 0; i < Engine.GAME_ROUNDS; i += 1) {
+            data[i] = packToPair();
+        }
+
+        Engine.run(RULES, data);
     }
 
     private static String[] packToPair() {

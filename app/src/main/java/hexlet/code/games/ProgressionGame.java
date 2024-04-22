@@ -14,15 +14,18 @@ public class ProgressionGame {
     private static final int LENGTH_PROGRESSION = 20;
 
     public static void run() {
-        Engine.run(RULES, new String[][]{
-                packToPair(),
-                packToPair(),
-                packToPair()
-        });
+        String[][] data = new String[Engine.GAME_ROUNDS][];
+        for (var i = 0; i < Engine.GAME_ROUNDS; i += 1) {
+            data[i] = packToPair();
+        }
+
+        Engine.run(RULES, data);
     }
 
     private static String[] packToPair() {
-        var progression = createProgression();
+        var step = MathUtils.randomInt(MIN_STEP, MAX_STEP);
+        var firstNumber = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
+        var progression = createProgression(ProgressionGame.LENGTH_PROGRESSION, step, firstNumber);
         var hiddenIndex = MathUtils.randomInt(0, LENGTH_PROGRESSION - 1);
         var answer = progression[hiddenIndex];
         progression[hiddenIndex] = "..";
@@ -30,11 +33,10 @@ public class ProgressionGame {
         return new String[]{question, answer};
     }
 
-    private static String[] createProgression() {
-        String[] result = new String[ProgressionGame.LENGTH_PROGRESSION];
-        var step = MathUtils.randomInt(MIN_STEP, MAX_STEP);
-        var nextNumber = MathUtils.randomInt(MIN_NUMBER, MAX_NUMBER);
-        for (var i = 0; i < ProgressionGame.LENGTH_PROGRESSION; i += 1) {
+    private static String[] createProgression(int length, int step, int firstNumber) {
+        String[] result = new String[length];
+        var nextNumber = firstNumber;
+        for (var i = 0; i < length; i += 1) {
             result[i] = String.valueOf(nextNumber);
             nextNumber = nextNumber + step;
         }

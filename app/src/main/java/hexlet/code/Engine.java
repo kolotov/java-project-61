@@ -12,7 +12,7 @@ public class Engine {
     private static final String MESSAGE_ASK_NAME = "May I have your name? ";
     private static final String MESSAGE_HELLO = "Hello, %s!";
 
-    private static final int GAME_ROUNDS = 3;
+    public static final int GAME_ROUNDS = 3;
 
     private static Scanner scanner = new Scanner(System.in);
 

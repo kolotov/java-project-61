@@ -17,13 +17,7 @@ public class App {
     private static final int MENU_ITEM_PROGRESSION_GAME = 5;
     private static final int MENU_ITEM_PRIME_GAME = 6;
 
-    private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        showMenu();
-    }
-
-    private static void showMenu() {
         System.out.println("Please enter the game number and press Enter.");
         System.out.printf("%d - Great%n", MENU_ITEM_GREAT);
         System.out.printf("%d - Even%n", MENU_ITEM_EVEN_GAME);
@@ -35,21 +29,25 @@ public class App {
 
         System.out.print("Your choice: ");
         var itemNumber = 0;
+        var scanner = new Scanner(System.in);
+
         if (scanner.hasNextInt()) {
             itemNumber = scanner.nextInt();
         }
 
         switch (itemNumber) {
-            case MENU_ITEM_EXIT -> { }
+            case MENU_ITEM_EXIT -> {
+            }
             case MENU_ITEM_GREAT -> Cli.greetUser();
             case MENU_ITEM_EVEN_GAME -> EvenGame.run();
             case MENU_ITEM_CALC_GAME -> CalcGame.run();
             case MENU_ITEM_GCD_GAME -> GcdGame.run();
             case MENU_ITEM_PROGRESSION_GAME -> ProgressionGame.run();
             case MENU_ITEM_PRIME_GAME -> PrimeGame.run();
-            default -> { }
+            default -> System.out.println("Incorrect input!");
         }
     }
+
 }
 
 
