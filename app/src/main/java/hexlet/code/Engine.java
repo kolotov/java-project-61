@@ -3,6 +3,7 @@ package hexlet.code;
 import java.util.Scanner;
 
 public class Engine {
+    public static final int GAME_ROUNDS = 3;
     private static final String MESSAGE_CONGRATULATION = "Congratulations, %s!";
     private static final String MESSAGE_CORRECT = "Correct!";
     private static final String MESSAGE_WELCOME = "Welcome to the Brain Games!";
@@ -11,9 +12,6 @@ public class Engine {
     private static final String MESSAGE_QUESTION_PROMPT = "Question: %s%nYour answer: ";
     private static final String MESSAGE_ASK_NAME = "May I have your name? ";
     private static final String MESSAGE_HELLO = "Hello, %s!";
-
-    public static final int GAME_ROUNDS = 3;
-
     private static Scanner scanner = new Scanner(System.in);
 
     public static void run(String rules, String[][] gameData) {
@@ -28,9 +26,8 @@ public class Engine {
     }
 
     private static void startGame(String[][] gameData, String name) {
-        var currentRound = 0;
-        while (currentRound < GAME_ROUNDS) {
-            var questionPair = gameData[currentRound];
+        for (var round = 0; round < GAME_ROUNDS; round += 1) {
+            var questionPair = gameData[round];
             var question = questionPair[0];
             var answer = questionPair[1];
 
@@ -42,12 +39,9 @@ public class Engine {
                 return;
             }
 
-            currentRound += 1;
             System.out.println(MESSAGE_CORRECT);
         }
 
-        if (currentRound == GAME_ROUNDS) {
-            System.out.printf(MESSAGE_CONGRATULATION.formatted(name) + "%n");
-        }
+        System.out.printf(MESSAGE_CONGRATULATION.formatted(name) + "%n");
     }
 }
