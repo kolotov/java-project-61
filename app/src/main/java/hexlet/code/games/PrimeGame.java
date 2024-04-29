@@ -29,7 +29,7 @@ public class PrimeGame {
             return false;
         }
 
-        int start = number / 2;
+        int start = (int) Math.sqrt(number);
         for (var i = start; i > 1; i -= 1) {
             if (number % i == 0) {
                 return false;
